@@ -25,11 +25,13 @@ jobs:
         poll: True
     - name: Tar files
       run: tar -cvf artifact.tar ${{ RUNNER.temp }}/nb-runner
+    - name: Gzip files
+      run: gzip artifact.gz
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: github-pages
-        path:  artifact.tar
+        path:  artifact.gz
     - name: Download artifact
       uses: actions/download-artifact@v3
       env:

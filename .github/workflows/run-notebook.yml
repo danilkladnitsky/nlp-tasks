@@ -31,7 +31,7 @@ jobs:
         tar -czvf artifact.tar.gz _site/
         echo $PWD
         ls -la
-        mv artifact.tar.gz /artifact.tar.gz
+        sudo mv artifact.tar.gz /artifact.tar.gz
     - uses: actions/upload-artifact@v3
       if: always()
       with:

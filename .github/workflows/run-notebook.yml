@@ -45,6 +45,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/upload-pages-artifact@v1
         with:
-          artifact_name: "${{ github.head_ref }}_notebook"
+          name: "${{ github.head_ref }}_notebook"
+          path: ${{ RUNNER.temp }}/nb-runner

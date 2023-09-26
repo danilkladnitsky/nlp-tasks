@@ -46,7 +46,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ RUNNER.temp }}
+      url: ${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages

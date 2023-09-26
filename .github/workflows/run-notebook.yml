@@ -26,7 +26,25 @@ jobs:
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: output
+        name: "${{ github.head_ref }}/notebook"
         path: ${{ RUNNER.temp }}/nb-runner
+    - name: Download artifact
+      uses: actions/download-artifact@v3
       env:
         RUNNER: ${{ toJson(runner) }}
+      # Deploy job
+  deploy:
+    needs: run
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+        with:
+          artifact_name: "${{ github.head_ref }}/notebook"

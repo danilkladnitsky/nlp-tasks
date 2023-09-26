@@ -31,12 +31,11 @@ jobs:
         tar -czvf artifact.tar.gz _site/
         echo $PWD
         ls -la
-        sudo mv artifact.tar.gz /artifact.tar.gz
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: github-pages
-        path: artifact.tar.gz
+        path: ${{ RUNNER.temp }}/nb-runner/artifact.tar.gz
     - name: Download artifact
       uses: actions/download-artifact@v3
       env:

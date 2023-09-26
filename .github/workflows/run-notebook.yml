@@ -27,7 +27,8 @@ jobs:
       run: |
         cd ${{ RUNNER.temp }}/nb-runner/
         ls -la
-        tar -czvf artifact.tar.gz task.html
+        mv task.html _site/task.html
+        tar -czvf artifact.tar.gz _site/
     - uses: actions/upload-artifact@v3
       if: always()
       with:

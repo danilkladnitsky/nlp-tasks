@@ -28,14 +28,14 @@ jobs:
         cd ${{ RUNNER.temp }}/nb-runner/
         mkdir _site
         mv task.html _site/task.html
-        tar -czvf artifact.tar.gz _site/
+        tar -cvf artifact.tar _site/
         echo $PWD
         ls -la
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: github-pages
-        path: ${{ RUNNER.temp }}/nb-runner/artifact.tar.gz
+        path: ${{ RUNNER.temp }}/nb-runner/artifact.tar
     - name: Download artifact
       uses: actions/download-artifact@v3
       env:

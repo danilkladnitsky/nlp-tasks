@@ -27,8 +27,8 @@ jobs:
       run: |
         cd ${{ RUNNER.temp }}/nb-runner/
         mkdir _site
-        mv task.html _site/task.html
-        tar --dereference --hard-dereference -cvf artifact.tar _site/
+        mv task.html ${{ github.head_ref }}/index.html
+        tar --dereference --hard-dereference -cvf artifact.tar ${{ github.head_ref }}/
     - uses: actions/upload-pages-artifact@v2
       if: always()
       with:

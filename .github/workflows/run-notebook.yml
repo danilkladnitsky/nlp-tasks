@@ -29,8 +29,7 @@ jobs:
         mkdir _site
         mv task.html _site/task.html
         tar -cvf artifact.tar _site/
-        echo $PWD
-        ls -la
+        unlink artifact.tar
     - uses: actions/upload-artifact@v2
       if: always()
       with:

@@ -29,13 +29,11 @@ jobs:
         mkdir _site
         mv task.html _site/task.html
         tar -czvf artifact.tar.gz _site/
-        cd /
-        ls -la
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: github-pages
-        path:  artifact.tar.gz
+        path:  ${{ RUNNER.temp }}/artifact.tar.gz
     - name: Download artifact
       uses: actions/download-artifact@v3
       env:

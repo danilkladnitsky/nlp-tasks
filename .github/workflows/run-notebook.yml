@@ -1,4 +1,4 @@
-name: Check if notebook is executable
+name: Check if notebook is executable and linted
 
 on: [pull_request]
 

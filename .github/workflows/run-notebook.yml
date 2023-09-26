@@ -23,16 +23,18 @@ jobs:
         params: "PATHTOPARAMS.json"
         isReport: False
         poll: True
+    - name: Tar files
+      run: tar -cvf artifact.tar ${{ RUNNER.temp }}/nb-runner
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: "${{ github.head_ref }}_notebook"
-        path: ${{ RUNNER.temp }}/nb-runner
+        name: github-pages
+        path:  artifact.tar
     - name: Download artifact
       uses: actions/download-artifact@v3
       env:
         RUNNER: ${{ toJson(runner) }}
-      # Deploy job
+
   deploy:
     needs: run
     permissions:
@@ -46,6 +48,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/upload-pages-artifact@v1
-        with:
-          name: "${{ github.head_ref }}_notebook"
-          path: ${{ RUNNER.temp }}/nb-runner

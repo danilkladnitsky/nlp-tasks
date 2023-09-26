@@ -24,7 +24,9 @@ jobs:
         isReport: False
         poll: True
     - name: Tar files
-      run: tar -czvf artifact.tar.gz ${{ RUNNER.temp }}/_site
+      run: |
+        mv ${{ RUNNER.temp }}/nb_runner ${{ RUNNER.temp }}/_site 
+        tar -czvf artifact.tar.gz ${{ RUNNER.temp }}/_site
     - uses: actions/upload-artifact@v3
       if: always()
       with:

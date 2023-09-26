@@ -12,7 +12,7 @@ jobs:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
       with:
-        path: ${{ github.head_ref }}
+        path: ${{ github.head_ref }}/requirements.txt
     - uses: yaananth/run-notebook@v2
       env:
         RUNNER: ${{ toJson(runner) }}

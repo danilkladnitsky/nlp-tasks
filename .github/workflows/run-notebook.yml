@@ -29,6 +29,8 @@ jobs:
         mkdir _site
         mv task.html _site/task.html
         tar -czvf artifact.tar.gz _site/
+        cd /
+        ls -la
     - uses: actions/upload-artifact@v3
       if: always()
       with:

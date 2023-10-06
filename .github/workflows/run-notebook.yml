@@ -1,4 +1,4 @@
-name: Check if notebook is executable
+name: Check if notebook is executable and linted
 
 on: [pull_request]
 
@@ -12,7 +12,7 @@ jobs:
     - name: Install Python dependencies
       uses: py-actions/py-dependency-install@v4
       with:
-        path: ${{ github.head_ref }
+        path: ${{ github.head_ref }}/requirements.txt
     - uses: yaananth/run-notebook@v2
       env:
         RUNNER: ${{ toJson(runner) }}
@@ -23,10 +23,32 @@ jobs:
         params: "PATHTOPARAMS.json"
         isReport: False
         poll: True
-    - uses: actions/upload-artifact@v3
+    - name: Tar files
+      run: |
+        cd ${{ RUNNER.temp }}/nb-runner/
+        mkdir ${{ github.head_ref }}
+        mv task.html ${{ github.head_ref }}/index.html
+        tar --dereference --hard-dereference -cvf artifact.tar ${{ github.head_ref }}/
+    - uses: actions/upload-pages-artifact@v2
       if: always()
       with:
-        name: output
-        path: ${{ RUNNER.temp }}/nb-runner
+        name: github-pages
+        path: ${{ RUNNER.temp }}/nb-runner/
+    - name: Download artifact
+      uses: actions/download-artifact@v3
       env:
         RUNNER: ${{ toJson(runner) }}
+
+  deploy:
+    needs: run
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}${{ github.head_ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

@@ -2,4 +2,6 @@
 bigartm.*
 urnuuid*
 
-*.csv
+**/*.csv
+*.kv
+*.txt

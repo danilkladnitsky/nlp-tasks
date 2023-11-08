@@ -1,0 +1,4 @@
+Log file created at: 2023/11/02 18:54:02
+Running on machine: DESKTOP-1BAQ97E
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I1102 18:54:02.902338  6957 c_interface.cc:127] Logging enabled to .

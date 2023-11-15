@@ -10,11 +10,7 @@ jobs:
     - uses: actions/setup-python@v3
       with:
         python-version: '3.9.12' 
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.9.12' 
-    - name: Install Python dependencies
-      uses: py-actions/py-dependency-install@v4
+    - uses: py-actions/py-dependency-install@v4
       with:
         path: ${{ github.head_ref }}/requirements.txt
     - uses: yaananth/run-notebook@v2

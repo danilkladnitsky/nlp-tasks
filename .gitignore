@@ -1,1 +1,7 @@
 */**.ipynb_checkpoints
+bigartm.*
+urnuuid*
+.venv
+**.bz2
+hw_5/stopwords-ru.json
+hw_5/stopwords-ru.txt

@@ -1,10 +1,23 @@
-name: Check notebook
-on: [pull_request]
+name: Jupyter Notebook
+
+on: [pull_request, workflow_dispatch]
 
 jobs:
-  run:
+  check-home-task:
+    permissions:
+        pages: write
+        id-token: write
+        pull-requests: write
+    
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}${{ github.head_ref }}
     runs-on: ubuntu-latest
     steps:
-    - uses: danilkladnitsky/auto-nlp-action@v0.0.1-alpha
-      with:
-        home-task-filename: notebook.ipynb
+      - uses: actions/checkout@v2
+      - name: verify-task
+        uses: danilkladnitsky/auto-nlp-action@v0.0.2-alpha
+        with:
+            home-task-filename: hometask.ipynb
+
+

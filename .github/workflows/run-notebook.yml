@@ -3,6 +3,14 @@ on: [pull_request]
 
 jobs:
   run:
+    permissions:
+        pages: write
+        id-token: write
+        pull-requests: write
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}${{ github.head_ref }}
+        
     runs-on: ubuntu-latest
     steps:
     - uses: danilkladnitsky/auto-nlp-action@v0.0.1-alpha

@@ -13,6 +13,6 @@ jobs:
         
     runs-on: ubuntu-latest
     steps:
-    - uses: danilkladnitsky/auto-nlp-action@v0.0.3-alpha
+    - uses: danilkladnitsky/auto-nlp-action@v0.0.4-alpha
       with:
         home-task-filename: notebook.ipynb
